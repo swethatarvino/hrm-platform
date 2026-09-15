@@ -64,7 +64,13 @@ class AuthService {
     try {
       const stored = localStorage.getItem('hrm_credentials');
       if (stored) {
-        return JSON.parse(stored);
+        const credentials: UserCredential[] = JSON.parse(stored);
+        const knownIds = new Set(credentials.map((credential) => credential.userId));
+        const merged = [...credentials, ...initialCredentials.filter((credential) => !knownIds.has(credential.userId))];
+        if (merged.length !== credentials.length) {
+          localStorage.setItem('hrm_credentials', JSON.stringify(merged));
+        }
+        return merged;
       }
       // Initialize with seed credentials
       localStorage.setItem('hrm_credentials', JSON.stringify(initialCredentials));
@@ -286,6 +292,7 @@ class AuthService {
         (trimmed === 'shwetha' && u.id === 'usr_founder') ||
         (trimmed === 'admin' && u.role === 'FOUNDER_DIRECTOR') ||
         (trimmed === 'founder' && u.role === 'FOUNDER_DIRECTOR') ||
+        (trimmed === 'superadmin' && u.id === 'usr_superadmin') ||
         (trimmed === 'david' && u.id === 'usr_emp_1') ||
         (trimmed === 'elena' && u.id === 'usr_emp_2') ||
         (trimmed === 'marcus' && u.id === 'usr_emp_3')
@@ -322,7 +329,7 @@ class AuthService {
         }
       }
 
-      // Convenience for seed accounts (Shwetha, David, Elena, Marcus)
+      // Convenience for seed accounts (SuperAdmin, Shwetha, David, Elena, Marcus)
       if (!isValid && (cred.salt === SEED_SALT || user.id.startsWith('usr_'))) {
         const lower = cleanPassword.toLowerCase();
         if (
@@ -567,7 +574,7 @@ class AuthService {
       );
     }
 
-    if (targetUserId === adminUser.id || targetUserId === 'usr_founder') {
+    if (targetUserId === adminUser.id || targetUserId === 'usr_founder' || targetUserId === 'usr_superadmin') {
       throw new AuthorizationError(
         'Cannot remove the Founder/Director executive account.',
         400,

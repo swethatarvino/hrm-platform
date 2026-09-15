@@ -18,7 +18,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
-  const { currentUser, role, isFounder } = useAuth();
+  const { currentUser, isFounder, isSuperAdmin } = useAuth();
 
   // Clean, focused navigation for presentation
   const employeeNavItems = [
@@ -50,10 +50,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
             <span>{isFounder ? 'Admin Cockpit' : 'Employee Workspace'}</span>
           </div>
           <h3 className="text-sm font-bold text-white tracking-tight">
-            {isFounder ? 'Shwetha (Director)' : currentUser.name}
+            {isSuperAdmin ? 'Admininnovis (SuperAdmin)' : isFounder ? 'Shwetha (Director)' : currentUser.name}
           </h3>
           <p className="text-[11px] text-slate-400 mt-0.5">
-            {isFounder ? 'Full company visibility & task oversight' : 'Personal tasks & profile progress'}
+            {isSuperAdmin ? 'Organisation-wide control & oversight' : isFounder ? 'Full company visibility & task oversight' : 'Personal tasks & profile progress'}
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
           <div className="truncate flex-1">
             <div className="text-xs font-bold text-white truncate">{currentUser.name}</div>
             <div className="text-[10px] text-pink-300 font-semibold truncate capitalize">
-              {isFounder ? 'Admin' : 'Employee'}
+              {isSuperAdmin ? 'SuperAdmin' : isFounder ? 'Admin' : 'Employee'}
             </div>
           </div>
         </div>

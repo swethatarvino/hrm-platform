@@ -22,6 +22,12 @@ export const SEED_DEFAULT_HASH = hashPassword('Password@123', SEED_SALT);
 
 export const initialCredentials: UserCredential[] = [
   {
+    userId: 'usr_superadmin',
+    email: 'superadmin@apextech.io',
+    salt: SEED_SALT,
+    passwordHash: hashPassword('SuperAdmin@123', SEED_SALT),
+  },
+  {
     userId: 'usr_founder',
     email: 'shwetha@apextech.io',
     salt: SEED_SALT,
@@ -49,6 +55,18 @@ export const initialCredentials: UserCredential[] = [
 
 export const initialUsers: User[] = [
   {
+    id: 'usr_superadmin',
+    email: 'superadmin@apextech.io',
+    personalEmail: 'superadmin@apextech.io',
+    name: 'Admininnovis',
+    role: 'SUPERADMIN',
+    status: 'active',
+    avatarUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80',
+    lastLogin: 'Never',
+    department: 'Executive Leadership',
+    designation: 'Super Administrator',
+  },
+  {
     id: 'usr_founder',
     email: 'shwetha@apextech.io',
     personalEmail: 'shwetha.founder@gmail.com',
@@ -59,6 +77,7 @@ export const initialUsers: User[] = [
     lastLogin: '2026-09-09 09:30',
     department: 'Executive Leadership',
     designation: 'Managing Director & Admin',
+    reportsTo: 'usr_superadmin',
   },
   {
     id: 'usr_emp_1',

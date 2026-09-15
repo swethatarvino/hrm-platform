@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 
 export const ProfileModule: React.FC = () => {
-  const { currentUser, role, isFounder, updateAvatar, updateUserProfile, changePassword } = useAuth();
+  const { currentUser, role, isFounder, isSuperAdmin, updateAvatar, updateUserProfile, changePassword } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [activeSubTab, setActiveSubTab] = useState<'profile' | 'employment'>('profile');
@@ -169,7 +169,7 @@ export const ProfileModule: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-12">
+    <div className="workspace-page space-y-6 pb-12">
       {/* Header Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 sm:p-8 text-white shadow-xl">
         <div className="absolute right-0 top-0 w-96 h-96 bg-gradient-to-bl from-pink-500/20 via-purple-600/20 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -186,6 +186,9 @@ export const ProfileModule: React.FC = () => {
             <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
               Complete your employment details, contact records, and upload your profile picture. Changes update immediately across all team workspaces.
             </p>
+            {currentUser.reportsTo === 'usr_superadmin' && (
+              <p className="text-[11px] text-amber-200 mt-2 font-semibold">Reports to: Admininnovis, Super Administrator</p>
+            )}
           </div>
 
           <div className="shrink-0 flex items-center gap-2">
@@ -195,7 +198,7 @@ export const ProfileModule: React.FC = () => {
                 : 'bg-indigo-900/80 border border-indigo-700 text-indigo-200'
             }`}>
               <Briefcase className="w-3.5 h-3.5" />
-              <span>{isFounder ? 'Admin / Managing Director' : 'Employee Workspace'}</span>
+              <span>{isSuperAdmin ? 'SuperAdmin / Organisation Owner' : isFounder ? 'Admin / Managing Director' : 'Employee Workspace'}</span>
             </span>
           </div>
         </div>
@@ -701,7 +704,7 @@ export const ProfileModule: React.FC = () => {
               <div className="p-3.5 bg-slate-800/80 rounded-2xl border border-slate-700/60">
                 <span className="text-[11px] text-slate-400 block">Reporting Manager</span>
                 <span className="font-semibold text-white mt-0.5 block">
-                  {isFounder ? 'Self (Managing Director)' : 'Shwetha (Admin & Managing Director)'}
+                  {isSuperAdmin ? 'Self (SuperAdmin)' : isFounder ? 'Self (Managing Director)' : 'Shwetha (Admin & Managing Director)'}
                 </span>
               </div>
 

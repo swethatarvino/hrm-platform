@@ -27,7 +27,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   activeTab,
   setActiveTab,
 }) => {
-  const { currentUser, isFounder } = useAuth();
+  const { currentUser, isFounder, isSuperAdmin } = useAuth();
   const { config } = useOrg();
 
   // Close on Escape
@@ -95,7 +95,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
               </div>
               <div>
                 <span className="font-extrabold text-white text-xs truncate max-w-[140px] block">{config.name}</span>
-                <span className="text-[10px] text-pink-400 font-bold">{isFounder ? 'Admin View' : 'Employee View'}</span>
+                <span className="text-[10px] text-pink-400 font-bold">{isSuperAdmin ? 'SuperAdmin View' : isFounder ? 'Admin View' : 'Employee View'}</span>
               </div>
             </div>
             <button
@@ -148,7 +148,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
             />
             <div className="truncate">
               <span className="text-xs font-bold text-white block truncate">{currentUser.name}</span>
-              <span className="text-[10px] text-pink-300 font-semibold">{isFounder ? 'Admin' : 'Employee'}</span>
+              <span className="text-[10px] text-pink-300 font-semibold">{isSuperAdmin ? 'SuperAdmin' : isFounder ? 'Admin' : 'Employee'}</span>
             </div>
           </div>
         </div>

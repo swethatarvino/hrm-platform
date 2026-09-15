@@ -43,7 +43,7 @@ import { UnauthorizedPage } from '../auth/UnauthorizedPage';
 import { ConfirmDialog } from '../ui/ConfirmDialog';
 
 export const TeamVisibilityModule: React.FC = () => {
-  const { allUsers, currentUser, createEmployee, resendWelcomeEmail, removeEmployee, refreshUsersList } = useAuth();
+  const { allUsers, currentUser, isSuperAdmin, createEmployee, resendWelcomeEmail, removeEmployee, refreshUsersList } = useAuth();
 
   if (!isFounder(currentUser.role)) {
     return <UnauthorizedPage moduleName="Employee Directory & Employment Information" />;
@@ -73,7 +73,7 @@ export const TeamVisibilityModule: React.FC = () => {
   const [showPresetAvatars, setShowPresetAvatars] = useState(false);
   const [photoUploadError, setPhotoUploadError] = useState<string | null>(null);
   const [isSaved, setIsSaved] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(true);
   const [isOutboxOpen, setIsOutboxOpen] = useState(false);
 
   // Employee Removal states
@@ -333,7 +333,7 @@ export const TeamVisibilityModule: React.FC = () => {
   const inspectedEmployment = inspectEmployee ? storageService.getEmploymentDetails(inspectEmployee.id, currentUser) : null;
 
   return (
-    <div className="space-y-6 max-w-6xl">
+    <div className="workspace-page space-y-6">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-indigo-950/60 shadow-xl relative overflow-hidden">
         <div className="absolute right-0 top-0 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
@@ -342,7 +342,7 @@ export const TeamVisibilityModule: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-bold uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5 text-pink-400" />
-              <span>Founder & Admin Controls</span>
+              <span>{isSuperAdmin ? 'SuperAdmin Organisation Controls' : 'Founder & Admin Controls'}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Employee Directory & Team Management
@@ -376,7 +376,7 @@ export const TeamVisibilityModule: React.FC = () => {
             </button>
             <span className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-slate-800/80 text-pink-300 border border-pink-500/30">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Admin: Shwetha</span>
+              <span>{isSuperAdmin ? 'SuperAdmin: Admininnovis' : 'Admin: Shwetha'}</span>
             </span>
           </div>
         </div>
@@ -557,6 +557,11 @@ export const TeamVisibilityModule: React.FC = () => {
                                   Admin
                                 </span>
                               )}
+                              {emp.role === 'SUPERADMIN' && (
+                                <span className="px-1.5 py-0.2 rounded text-[8px] font-extrabold bg-amber-100 text-amber-700">
+                                  SuperAdmin
+                                </span>
+                              )}
                             </h4>
                             <p className="text-[11px] text-purple-700 font-semibold truncate">{emp.designation}</p>
                             <p className="text-[10px] text-slate-400 font-mono truncate">{profile?.employeeId || emp.email}</p>
@@ -584,7 +589,7 @@ export const TeamVisibilityModule: React.FC = () => {
             )}
 
             {/* Right Column: Detailed Record Workspace */}
-            <div className={`w-full ${isFullScreen ? 'lg:w-full' : 'lg:w-8/12'} bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6 relative transition-all`}>
+            <div className={`w-full ${isFullScreen ? 'lg:w-full' : 'lg:w-8/12'} bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6 relative transition-all`}>
               {/* Workspace Header Toolbar */}
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div className="flex items-center gap-2.5">
@@ -944,7 +949,7 @@ export const TeamVisibilityModule: React.FC = () => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  {inspectEmployee.role !== 'FOUNDER_DIRECTOR' ? (
+                  {inspectEmployee.role !== 'FOUNDER_DIRECTOR' && inspectEmployee.role !== 'SUPERADMIN' ? (
                     <button
                       type="button"
                       onClick={() => setEmployeeToDelete(inspectEmployee)}
@@ -1077,7 +1082,7 @@ export const TeamVisibilityModule: React.FC = () => {
                       <span>Inspect Record</span>
                     </button>
 
-                    {emp.role !== 'FOUNDER_DIRECTOR' && (
+                    {emp.role !== 'FOUNDER_DIRECTOR' && emp.role !== 'SUPERADMIN' && (
                       <button
                         type="button"
                         onClick={() => setEmployeeToDelete(emp)}

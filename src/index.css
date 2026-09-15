@@ -18,6 +18,18 @@
   --dark-blue: #0f172a;
 }
 
+body {
+  margin: 0;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.workspace-page {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
 /* Custom modern scrollbars */
 ::-webkit-scrollbar {
   width: 6px;

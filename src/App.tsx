@@ -97,7 +97,7 @@ export const App: React.FC = () => {
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Scrollable Workspace Content Area */}
-        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[calc(100vh-4rem)] bg-slate-100">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto min-h-[calc(100vh-4rem)] bg-slate-100">
           {renderActiveModule()}
         </main>
       </div>

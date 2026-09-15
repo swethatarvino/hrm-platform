@@ -1,7 +1,10 @@
-export type UserRole = 'EMPLOYEE' | 'FOUNDER_DIRECTOR';
+export type UserRole = 'EMPLOYEE' | 'FOUNDER_DIRECTOR' | 'SUPERADMIN';
 
 export const isFounder = (role: UserRole | string): boolean =>
-  role === 'FOUNDER_DIRECTOR' || role === 'founder';
+  role === 'FOUNDER_DIRECTOR' || role === 'founder' || role === 'SUPERADMIN' || role === 'superadmin';
+
+export const isSuperAdmin = (role: UserRole | string): boolean =>
+  role === 'SUPERADMIN' || role === 'superadmin';
 
 export const isEmployee = (role: UserRole | string): boolean =>
   role === 'EMPLOYEE' || role === 'employee';
@@ -59,6 +62,7 @@ export interface User {
   lastLogin: string;
   department: string;
   designation: string;
+  reportsTo?: string;
 }
 
 export interface DispatchedEmail {

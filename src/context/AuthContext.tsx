@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { User, UserRole, isFounder, isEmployee, CreateEmployeeInput, DispatchedEmail } from '../types';
+import { User, UserRole, isFounder, isEmployee, isSuperAdmin, CreateEmployeeInput, DispatchedEmail } from '../types';
 import { initialUsers } from '../services/mockData';
 import { authService } from '../services/authService';
 
@@ -7,6 +7,7 @@ interface AuthContextType {
   currentUser: User;
   role: UserRole;
   isFounder: boolean;
+  isSuperAdmin: boolean;
   isEmployee: boolean;
   isAuthenticated: boolean;
   allUsers: User[];
@@ -65,6 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const role: UserRole = currentUser.role;
   const isCurrentUserFounder = isFounder(currentUser.role);
+  const isCurrentUserSuperAdmin = isSuperAdmin(currentUser.role);
   const isCurrentUserEmployee = isEmployee(currentUser.role);
 
   const refreshUsersList = () => {
@@ -170,6 +172,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         currentUser,
         role,
         isFounder: isCurrentUserFounder,
+        isSuperAdmin: isCurrentUserSuperAdmin,
         isEmployee: isCurrentUserEmployee,
         isAuthenticated,
         allUsers: usersList,

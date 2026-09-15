@@ -8,7 +8,7 @@ interface UserMenuProps {
 }
 
 export const UserMenu: React.FC<UserMenuProps> = ({ onNavigateProfile }) => {
-  const { currentUser, isFounder, logout } = useAuth();
+  const { currentUser, isFounder, isSuperAdmin, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +65,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onNavigateProfile }) => {
             <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
           </div>
           <div className="text-[11px] text-slate-500 font-medium capitalize">
-            {isFounder ? 'Admin (Shwetha)' : 'Employee'}
+            {isSuperAdmin ? 'SuperAdmin (Admininnovis)' : isFounder ? 'Admin (Shwetha)' : 'Employee'}
           </div>
         </div>
       </button>
@@ -82,7 +82,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ onNavigateProfile }) => {
             <p className="text-[11px] text-slate-500 mt-0.5 truncate">{currentUser.email}</p>
             <div className="mt-2 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200">
               {isFounder ? <ShieldCheck className="w-3 h-3 text-pink-600" /> : <UserCheck className="w-3 h-3 text-purple-600" />}
-              <span>{isFounder ? 'Admin (Full Access)' : 'Employee Access'}</span>
+              <span>{isSuperAdmin ? 'SuperAdmin (Organisation Access)' : isFounder ? 'Admin (Full Access)' : 'Employee Access'}</span>
             </div>
           </div>
 
