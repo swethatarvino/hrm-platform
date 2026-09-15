@@ -17,8 +17,8 @@ export const defaultOrganizationConfig: OrganizationConfig = {
   name: "Apex Global Technologies",
   tagline: "Operations, People & Growth Cockpit",
   logoText: "APEX",
-  currencySymbol: "$",
-  currencyCode: "USD",
+  currencySymbol: "₹",
+  currencyCode: "INR",
   primaryColor: "#d946ef", // Vibrant Pinkish-Purple
   fiscalYearStartMonth: 1,
   workHourRecordingMethod: 'clock_in_out',
@@ -31,13 +31,15 @@ export const clientThemePresets: Record<string, Partial<OrganizationConfig>> = {
     name: "Nova Dynamics",
     logoText: "NOVA",
     primaryColor: "#2563eb",
-    currencySymbol: "$",
+    currencySymbol: "₹",
+    currencyCode: "INR",
   },
   "FinTech & Capital (Emerald)": {
     name: "Verdant Capital Partners",
     logoText: "VERDANT",
     primaryColor: "#059669",
-    currencySymbol: "$",
+    currencySymbol: "₹",
+    currencyCode: "INR",
   },
   "Indian IT Services (Indigo & ₹)": {
     name: "VedicSys Solutions",
@@ -51,7 +53,7 @@ export const clientThemePresets: Record<string, Partial<OrganizationConfig>> = {
     name: "Aura Creative Agency",
     logoText: "AURA",
     primaryColor: "#7c3aed",
-    currencySymbol: "£",
-    currencyCode: "GBP",
+    currencySymbol: "₹",
+    currencyCode: "INR",
   },
 };

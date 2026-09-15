@@ -55,7 +55,11 @@ export const OrgProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const formatCurrency = (amount: number) => {
-    return `${config.currencySymbol}${amount.toLocaleString('en-US')}`;
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (

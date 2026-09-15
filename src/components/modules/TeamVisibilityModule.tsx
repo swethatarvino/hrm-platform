@@ -144,7 +144,7 @@ export const TeamVisibilityModule: React.FC = () => {
     setEditJoiningDate(empDetails?.joiningDate || '2024-03-15');
     setEditReportingPerson(empDetails?.reportingPerson || 'Shwetha (Managing Director)');
     setEditStatus(empDetails?.employmentStatus || 'Full-Time');
-    setEditCompensation(empDetails?.compensation || '$135,000 / annum');
+    setEditCompensation(empDetails?.compensation || '₹1,35,000 / annum');
 
     setShowPresetAvatars(false);
     setPhotoUploadError(null);
@@ -216,7 +216,7 @@ export const TeamVisibilityModule: React.FC = () => {
         department: editDepartment,
         reportingPerson: editReportingPerson.trim(),
         employmentStatus: editStatus as any,
-        compensation: editCompensation.trim() || '$135,000 / annum',
+        compensation: editCompensation.trim() || '₹1,35,000 / annum',
       },
       currentUser
     );
@@ -936,7 +936,7 @@ export const TeamVisibilityModule: React.FC = () => {
                           type="text"
                           value={editCompensation}
                           onChange={(e) => setEditCompensation(e.target.value)}
-                          placeholder="e.g. $135,000 / annum (or ₹24,00,000 / year)"
+                          placeholder="e.g. ₹24,00,000 / year"
                           className="w-full text-xs font-mono font-bold px-3 py-2.5 rounded-xl border border-indigo-700/60 bg-slate-950/80 text-white placeholder-slate-500 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all"
                         />
                         <span className="text-[10px] text-slate-400 mt-1 block">
@@ -1102,8 +1102,8 @@ export const TeamVisibilityModule: React.FC = () => {
 
       {/* MODAL 1: ADD NEW EMPLOYEE MODAL (Admin Only) */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-xs p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 text-slate-900 shadow-2xl border border-slate-200 relative my-8 animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-100">
+          <div className="min-h-full w-full bg-white p-6 sm:p-8 lg:p-10 text-slate-900 relative animate-in fade-in duration-150">
             {/* Close Button */}
             <button
               onClick={() => {
@@ -1386,7 +1386,7 @@ export const TeamVisibilityModule: React.FC = () => {
                           type="tel"
                           value={newPhone}
                           onChange={(e) => setNewPhone(e.target.value)}
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="+91 98765 43210"
                           className="w-full px-3 py-2 rounded-xl border border-slate-300 text-slate-900 bg-white font-medium"
                         />
                       </div>

@@ -711,7 +711,7 @@ export const ProfileModule: React.FC = () => {
               <div className="p-3.5 bg-slate-800/80 rounded-2xl border border-slate-700/60">
                 <span className="text-[11px] text-slate-400 block">Compensation Tier</span>
                 <span className="font-semibold text-white mt-0.5 block">
-                  {employmentDetails?.compensation || '$135,000 / annum (Protected)'}
+                  {employmentDetails?.compensation || '₹1,35,000 / month (Protected)'}
                 </span>
               </div>
             </div>
@@ -844,7 +844,7 @@ export const ProfileModule: React.FC = () => {
               <div className="p-3.5 bg-slate-800/80 rounded-2xl border border-slate-700/60">
                 <span className="text-[11px] text-slate-400 block">Compensation Package</span>
                 <span className="font-semibold text-white mt-0.5 block">
-                  {employmentDetails?.compensation || '$135,000 / annum (Protected)'}
+                  {employmentDetails?.compensation || '₹1,35,000 / month (Protected)'}
                 </span>
               </div>
 

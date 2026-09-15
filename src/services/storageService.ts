@@ -59,7 +59,13 @@ class StorageService {
 
   // --- Organization Config (White-label) ---
   getOrgConfig(): OrganizationConfig {
-    return this.get<OrganizationConfig>('org_config', defaultOrganizationConfig);
+    const config = this.get<OrganizationConfig>('org_config', defaultOrganizationConfig);
+    if (config.currencyCode !== 'INR' || config.currencySymbol !== '₹') {
+      const inrConfig = { ...config, currencySymbol: '₹', currencyCode: 'INR' };
+      this.set('org_config', inrConfig);
+      return inrConfig;
+    }
+    return config;
   }
 
   saveOrgConfig(config: OrganizationConfig): void {
@@ -155,7 +161,7 @@ class StorageService {
         department: requestingUser.department || 'Engineering',
         reportingPerson: 'Shwetha (Managing Director)',
         employmentStatus: 'Full-Time',
-        compensation: '$110,000 / annum (Standard Tier)',
+        compensation: '₹1,10,000 / month (Standard Tier)',
         bankAccountMasked: '•••• •••• •••• 1234',
         taxIdentifier: 'SSN-•••-••-5678',
         lastReviewDate: new Date().toISOString().split('T')[0],

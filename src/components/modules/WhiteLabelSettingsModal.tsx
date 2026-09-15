@@ -133,11 +133,7 @@ export const WhiteLabelSettingsModal: React.FC<WhiteLabelSettingsModalProps> = (
                   onChange={(e) => setFormData({ ...formData, currencySymbol: e.target.value })}
                   className="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 bg-white"
                 >
-                  <option value="$">USD ($) - US Dollar</option>
                   <option value="₹">INR (₹) - Indian Rupee</option>
-                  <option value="€">EUR (€) - Euro</option>
-                  <option value="£">GBP (£) - British Pound</option>
-                  <option value="¥">JPY/CNY (¥) - Yen / Yuan</option>
                 </select>
               </div>
 
